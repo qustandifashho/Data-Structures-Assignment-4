@@ -319,19 +319,14 @@ void updateHeights(TNode* root){
  *
  * For additional help in testing set the parameters PRINT_AVL_TREE and PRINT_AVL_ERRORS to true in the driver
  */
+
 void rebalanceTree(Tree* t, TNode* x){
     //TODO
-    while(x != NULL){ // while x is not null
-        updateHeights(x);
+    while(x != NULL){ // while x is not null  
+        //updateHeights(x); /
         int balance = getBalance(x); // get balance already defined 
-        if((balance <= -2) || (balance >= 2)){ // this is if the rank is not -1,1,0 (should I change to that??) 
-            TNode* z; // pointer z to refer to child node x 
-            if (balance > 0){ // if balance is positive 
-                z = getTallerSubTree(x-> pLeft); // NEED TO DEFINE
-            }
-            else { // if balance is negative 
-                z = getTallerSubTree(x->pRight); // NEED TO DEFINE 
-            }
+        if((balance <= -2) || (balance >= 2)){ 
+            TNode* z = getTallerSubTree(x);
 
             if((balance > 0 && getBalance(z) < 0) || (balance < 0 && getBalance(z) > 0)){ // if the balance of x and z have different signs 
                 if(getBalance(z) > 0){
@@ -360,9 +355,9 @@ void rebalanceTree(Tree* t, TNode* x){
  *
  * getTallerSubTree finds and returns the subtree of root with the larger height
  */
-TNode* getTallerSubTree(TNode* root){ // FINISH THIS NEED IT FOR FUNCTION ABOVE
+ TNode* getTallerSubTree(TNode* root){ // FINISH THIS NEED IT FOR FUNCTION ABOVE  d 
     //optional TODO
-    if(root == NULL){
+    if(root != NULL){ 
         int heightOfLeftBranch;
         int heightOfRightBranch;
         if(root->pLeft != NULL){
@@ -389,7 +384,7 @@ TNode* getTallerSubTree(TNode* root){ // FINISH THIS NEED IT FOR FUNCTION ABOVE
         }
     }
    
-    //exit(-1);   
+    exit(-1);   
 }
 
 /* isSameSignBalance
@@ -529,7 +524,7 @@ void printHuffmanEncoding( TNode* root, char c ){
     // If the current node contains the character c in its str, print the encoding.
     if (strchr(root->str, c) != NULL) {
         //printf("Character '%c' is encoded as ", c);
-        // Determine whether to go left (0) or right (1) based on the children's str. 
+        // Determine whether to go left (0) or right (1) based on the children's str.
         TNode* leftChild = root->pLeft;
         TNode* rightChild = root->pRight;
         if (leftChild && strchr(leftChild->str, c) != NULL) {
